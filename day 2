@@ -1,0 +1,53 @@
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        return isMirror(root.left, root.right);
+    }
+    
+    private boolean isMirror(TreeNode node1, TreeNode node2) {
+        if (node1 == null && node2 == null) {
+            return true;
+        }
+        if (node1 == null || node2 == null) {
+            return false;
+        }
+        return node1.val == node2.val && isMirror(node1.left, node2.right) && isMirror(node1.right, node2.left);
+    }
+}
+
+class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (root == null) return res;
+
+        Deque<TreeNode> q = new LinkedList<>();
+        q.addFirst(root);
+        boolean reverse = false;
+
+        while (!q.isEmpty()) {
+            List<Integer> current = new ArrayList<>();
+            int level = q.size();
+
+            for (int i = 0; i < level; i++) {
+                if (!reverse) {
+                    TreeNode curr = q.pollFirst();
+                    current.add(curr.val);
+                    if (curr.left != null) q.addLast(curr.left);
+                    if (curr.right != null) q.addLast(curr.right);
+                } else {
+                    TreeNode curr = q.pollLast();
+                    current.add(curr.val);
+                    if (curr.right != null) q.addFirst(curr.right);
+                    if (curr.left != null) q.addFirst(curr.left);
+                }
+            }
+
+            res.add(current);
+            reverse = !reverse;
+        }
+
+        return res;
+    }
+}
