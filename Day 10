@@ -1,0 +1,76 @@
+class Solution {
+
+    public int[] intersection(int[] nums1,
+                              int[] nums2) {
+
+        // Stores unique elements of nums1
+        Set<Integer> set = new HashSet<>();
+
+        // Stores final intersection
+        List<Integer> ans = new ArrayList<>();
+
+        // Add nums1 elements into set
+        for (int num : nums1) {
+
+            set.add(num);
+        }
+
+        // Traverse nums2
+        for (int num : nums2) {
+
+            /*
+             * Common element found
+             */
+
+            if (set.contains(num)) {
+
+                ans.add(num);
+
+                /*
+                 * Remove element
+                 * to avoid duplicates
+                 */
+
+                set.remove(num);
+            }
+        }
+
+        // Convert list to array
+        int[] result = new int[ans.size()];
+
+        for (int i = 0; i < ans.size(); i++) {
+
+            result[i] = ans.get(i);
+        }
+
+        return result;
+    }
+}
+class Solution {
+    public int thirdMax(int[] nums) {
+        long max = Long.MIN_VALUE;
+        long secondMax = Long.MIN_VALUE;
+        long thirdMax = Long.MIN_VALUE;
+
+        for (int num : nums) {
+            long val = num;
+
+            if (val == max || val == secondMax || val == thirdMax) {
+                continue;
+            }
+
+            if (val > max) {
+                thirdMax = secondMax;
+                secondMax = max;
+                max = val;
+            } else if (val > secondMax) {
+                thirdMax = secondMax;
+                secondMax = val;
+            } else if (val > thirdMax) {
+                thirdMax = val;
+            }
+        }
+
+        return thirdMax == Long.MIN_VALUE ? (int) max : (int) thirdMax;
+    }
+}
