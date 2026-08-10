@@ -1,0 +1,47 @@
+class NumArray 
+{
+    int[] pre; 
+    public NumArray(int[] nums) 
+    {
+        int n=nums.length;  
+        pre = new int[n];
+        pre[0]=nums[0];
+        for(int i=1;i<n;i++)
+        {
+            pre[i]=nums[i]+pre[i-1];
+        }
+    }
+    
+    public int sumRange(int left, int right) 
+    {
+        if(left==0) return pre[right];
+        return pre[right]-pre[left-1];
+    }
+//please upvote...
+}
+
+/**
+ * Your NumArray object will be instantiated and called as such:
+ * NumArray obj = new NumArray(nums);
+ * int param_1 = obj.sumRange(left,right);
+ */
+
+class Solution {
+    int idx=0;
+    List<Integer> ans;
+    public List<Integer> flipMatchVoyage(TreeNode root, int[] arr) {
+        ans=new ArrayList<>();
+        if(sol(root,arr)) return ans;
+        return Arrays.asList(-1);
+    }
+    public boolean sol(TreeNode root,int[] arr){
+        if(root==null) return true;
+        if(root.val!=arr[idx]) return false;
+        idx++;
+        if(root.left!=null && root.left.val!=arr[idx]){
+            ans.add(root.val);
+            return sol(root.right,arr) && sol(root.left,arr);
+        }
+        return sol(root.left,arr) && sol(root.right,arr);
+    }
+}
