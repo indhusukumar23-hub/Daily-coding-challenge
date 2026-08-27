@@ -1,0 +1,33 @@
+class Solution {
+    String[] rules = {".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
+    public int uniqueMorseRepresentations(String[] words) {
+        HashSet<String> set = new HashSet<>();
+
+        for(String word : words){
+            StringBuilder res = new StringBuilder();
+            for(char ch : word.toCharArray()){
+                int encodeIndex = ch - 'a';
+                res.append(rules[encodeIndex]);
+            }
+            set.add(res.toString());
+        }
+
+        return set.size();
+    }
+}
+
+class Solution {
+    public boolean judgeCircle(String moves) {
+        int c1 = 0; // horizontal
+        int c2 = 0; // vertical
+
+        for (char ch : moves.toCharArray()) {
+            if (ch == 'L') c1++;
+            else if (ch == 'R') c1--;
+            else if (ch == 'U') c2++;
+            else if (ch == 'D') c2--;
+        }
+
+        return c1 == 0 && c2 == 0;
+    }
+}
