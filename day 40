@@ -1,0 +1,32 @@
+class Solution {
+    public int bulbSwitch(int n) {
+        long low=0;
+        long high=n;
+        while(low<=high){
+            long mid=low+(high-low)/2;
+            if((mid*mid)==n)
+                return (int)mid;
+            else if((mid*mid)<n)
+                low=mid+1;
+            else
+                high=mid-1;
+        }
+        return (int)low-1;
+    }
+}
+
+class Solution {
+    public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
+         if(root1 == null && root2 == null){
+            return null;
+        }
+        if (root1 == null || root2 == null) {
+            return root1 == null?root2:root1;
+            
+        }
+        TreeNode res = new TreeNode(root1.val+root2.val);
+        res.left = mergeTrees(root1.left,root2.left);
+        res.right = mergeTrees(root1.right,root2.right);
+        return res;
+    }
+}
