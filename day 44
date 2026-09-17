@@ -1,0 +1,64 @@
+class Solution {
+    public int findLHS(int[] nums) {
+        HashMap<Integer,Integer> h = new HashMap<>();
+        for(int x : nums){
+            h.put(x,h.getOrDefault(x,0)+1);
+        }
+
+        int res = 0;
+        for(int x : h.keySet()){
+            if(h.containsKey(x+1)){
+                int sum = (h.get(x) + h.get(x+1));
+                res = Math.max(res,sum);
+            }
+        }
+    return res;
+    }
+}
+
+class Solution {
+
+    static int duplicateNum(int nums[])
+    {
+         HashSet<Integer> set = new HashSet<>();
+        for(int num : nums){
+            if(set.contains(num))
+            {
+                return num;
+            }
+            set.add(num);
+        }
+        return -1;
+    }
+
+    static int missingNum(int nums[])
+    {
+         HashSet<Integer> set = new HashSet<>();
+        for(int num : nums)
+        {
+            set.add(num);
+        }
+
+        for(int i = 1; i <= nums.length; i++)
+        {
+            if(!set.contains(i))
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public int[] findErrorNums(int[] nums) {
+        List<Integer> ans = new ArrayList<>();
+
+        int Duplicate = duplicateNum(nums);
+        int Missing = missingNum(nums);
+
+        ans.add(Duplicate);
+        ans.add(Missing);
+
+        return new int[] {ans.get(0), ans.get(1)};
+    }
+}
+``` ****Up Vote****
