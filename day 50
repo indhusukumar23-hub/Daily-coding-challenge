@@ -1,0 +1,49 @@
+public class Solution {
+    public int[] sortArrayByParity(int[] nums) {
+        int[] result = new int[nums.length];
+        int evenIndex = 0;
+        int oddIndex = nums.length - 1;
+        
+        for (int num : nums) {
+            if (num % 2 == 0) {
+                result[evenIndex] = num;
+                evenIndex++;
+            } else {
+                result[oddIndex] = num;
+                oddIndex--;
+            }
+        }
+        
+        return result;
+    }
+}
+
+class Solution {
+    public int[] sortArrayByParityII(int[] nums) {
+        int n = nums.length;
+        int a[] = new int[n / 2];
+        int b[] = new int[n / 2];
+
+        int k = 0, l = 0;
+
+        for (int i = 0; i < n; i++) {
+            if (nums[i] % 2 == 0) {
+                a[k] = nums[i];
+                k++;
+            } else {
+                b[l] = nums[i];
+                l++;
+            }
+        }
+
+        int h = 0;
+
+        for (int i = 0; i < n; i += 2) {
+            nums[i] = a[h];
+            nums[i + 1] = b[h];
+            h++;
+        }
+
+        return nums;
+    }
+}
