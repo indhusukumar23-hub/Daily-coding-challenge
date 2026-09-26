@@ -1,0 +1,48 @@
+class Solution {
+    public int projectionArea(int[][] grid) {
+        int a=0,x=0;
+        for(int i=0;i<grid.length;i++)
+        {
+            int mr=Integer.MIN_VALUE;
+            int mc=Integer.MIN_VALUE;
+            for(int j=0;j<grid[0].length;j++)
+            {
+                if(grid[i][j]!=0)x+=1;
+                if(grid[i][j]>mr)mr=grid[i][j];
+                if(grid[j][i]>mc)mc=grid[j][i];
+            }
+            a+=mr+mc; 
+        }
+        return (a+x);
+    }
+}
+
+class Solution {
+    public boolean lemonadeChange(int[] bills) {
+        int five_dollars = 0, ten_dollars = 0;
+
+        for (int x : bills) {
+            if (x == 5) {
+                five_dollars++;
+            } else if (x == 10) {
+                if (five_dollars > 0) {
+                    five_dollars--;
+                    ten_dollars++;
+                } else {
+                    return false;
+                }
+            } else {
+                if (five_dollars > 0 && ten_dollars > 0) {
+                    five_dollars--;
+                    ten_dollars--;
+                } else if (five_dollars > 2) {
+                    five_dollars -= 3;
+                } else {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+}
